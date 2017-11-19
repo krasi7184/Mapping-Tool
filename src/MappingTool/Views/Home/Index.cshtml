@@ -1,0 +1,59 @@
+﻿
+<div>
+    <form asp-controller="Home" asp-action="Index" method="post">
+        Input the elements that you want to be matched:
+        <br />
+        <div>
+            Element 1:
+            <div class="form-inline">
+                <input class="form-control" type="text" name="elementsToBeMatched[0].ID" />
+                <input class="form-control" type="text" name="elementsToBeMatched[0].Name" />
+            </div>
+            <button id="addMoreMatchched" class="btn btn-primary">Add More</button>
+        </div>
+        <br />
+        Input the elements that you want them to be matched to:
+        <br />
+        <div>
+            Element 1:
+            <div class="form-inline">
+                <input class="form-control" type="text" name="elementsToBeMatchedAgainst[0].ID" />
+                <input class="form-control" type="text" name="elementsToBeMatchedAgainst[0].Name" />
+            </div>
+            <button id="addMoreMatchchedAgainst" class="btn btn-primary">Add More</button>
+        </div>
+        <input class="btn btn-lg btn-primary" style="margin-top:5px" type="submit" />
+    </form>
+</div>
+
+
+
+@section Scripts {
+    <script>
+
+        $(function () {
+            var i = 1;
+            $("#addMoreMatchched").on("click", function (e) {
+                e.preventDefault();
+                $("<span> Element " + (i + 1) + ": " + "<div class='form-inline'></span><input type='text' class='form-control' name='elementsToBeMatched[" + i + "].ID'/> <input type='text' class='form-control' name='elementsToBeMatched[" + i + "].Name' /> <br><div>").insertBefore('#addMoreMatchched');
+                i += 1;
+
+            })
+
+        })
+    </script>
+
+    <script>
+
+        $(function () {
+            var i = 1;
+            $("#addMoreMatchchedAgainst").on("click", function (e) {
+                e.preventDefault();
+                $("<span> Element " + (i + 1) + "<div class='form-inline'></span><input type='text' class='form-control' name='elementsToBeMatchedAgainst[" + i + "].ID' /> <input type='text' class='form-control' name='elementsToBeMatchedAgainst[" + i + "].Name' /> <br></div>").insertBefore('#addMoreMatchchedAgainst');
+                i += 1;
+            })
+
+        })
+    </script>
+    
+}

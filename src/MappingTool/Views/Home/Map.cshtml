@@ -1,0 +1,59 @@
+﻿@model MappingTool.Models.AllElementsViewModel
+
+<div>
+    <table class="table table-striped">
+        <tr>
+            <th>Parameters</th>
+            <th>Mapped</th>
+            <th>Not Mapped</th>
+        </tr>
+        @{
+            int count = Math.Max(Model.ElementsToBeMatched.Count, Model.UnmappedElements.Count);
+        }
+
+        @for (int i = 0; i < count; i++)
+        {
+            <tr  >
+                @if (i < Model.ElementsToBeMatched.Count)
+                {
+                    <td>@Model.ElementsToBeMatched[i].Name</td>
+
+                    @if (Model.ElementsToBeMatchedAgainstOrdered[i].Count != 0)
+                    {
+                        string output = "";
+
+                        @for (int j = 0; j < Model.ElementsToBeMatchedAgainstOrdered[i].Count; j++)
+                        {
+                            output += Model.ElementsToBeMatchedAgainstOrdered[i][j].Name;
+                            if (j < Model.ElementsToBeMatchedAgainstOrdered[i].Count - 1)
+                            {
+                                output += ", ";
+                            }
+                        }
+                        <td>@output</td>
+                    }
+                    else
+                    {
+                        <td>No Match Found</td>
+                    }
+                }
+                else
+                {
+                    <td>-</td>
+                    <td>-</td>
+                }
+
+                @if (i < Model.UnmappedElements.Count)
+                {
+                    <td>@Model.UnmappedElements[i].Name</td>
+                }
+                else
+                {
+                    <td></td>
+                }
+            </tr>
+        }
+
+    </table>
+</div>
+
